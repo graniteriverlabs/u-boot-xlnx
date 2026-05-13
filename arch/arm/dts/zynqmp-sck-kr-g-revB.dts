@@ -169,6 +169,7 @@
 	assigned-clock-rates = <250000000>, <20000000>;
 
 	usbhub1: usb-hub { /* u84 */
+		status = "disabled"; //21,Aug'2025,Anand: Hub is not mounted in Vdpwr2.0
 		i2c-bus = <&usbhub_i2c1>;
 		compatible = "microchip,usb5744";
 		reset-gpios = <&slg7xl45106 4 GPIO_ACTIVE_LOW>;
@@ -177,13 +178,15 @@
 
 &dwc3_1 {
 	status = "okay";
-	dr_mode = "host";
+	dr_mode = "otg";
+	usb-role-switch;
+	role-switch-default-mode = "peripheral";
 	snps,usb3_lpm_capable;
 	maximum-speed = "super-speed";
 };
 
 &gem0 { /* mdio mio50/51 */
-	status = "okay";
+	status = "disabled"; //21,Aug'2025,Kannan: this phy address is not present
 	phys = <&psgtr 0 PHY_TYPE_SGMII 0 0>;
 	phy-handle = <&phy0>;
 	phy-mode = "sgmii";
@@ -203,6 +206,7 @@
 		#address-cells = <1>;
 		#size-cells = <0>;
 		phy0: ethernet-phy@4 { /* u81 */
+			status = "disabled"; //21,Aug'2025,Kannan: this phy address is not present
 			#phy-cells = <1>;
 			compatible = "ethernet-phy-id2000.a231";
 			reg = <4>;
