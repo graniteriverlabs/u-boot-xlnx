@@ -101,6 +101,7 @@
 			reg = <0>;
 		};
 		usbhub_i2c1: i2c@1 {
+			status = "disabled";
 			#address-cells = <1>;
 			#size-cells = <0>;
 			reg = <1>;
